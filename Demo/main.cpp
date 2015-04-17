@@ -21,10 +21,12 @@
 #include <iostream>
 #include <QFileDialog>
 #include <Demo.h>
+#include <QtCore/QDir>
 
 int
 main( int argc , char *argv[] )
   {
+    Q_INIT_RESOURCE(qtshanoir);
     QApplication app(argc, argv);
     Demo demo;
     demo.show();

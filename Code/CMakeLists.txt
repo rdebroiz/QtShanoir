@@ -6,6 +6,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 list_source_files(${PROJECT_NAME}
   ${CMAKE_CURRENT_SOURCE_DIR}
+  Resources
   )
 
 ## #############################################################################
@@ -30,6 +31,8 @@ set(${PROJECT_NAME}_INCLUDE_DIRS
 ## #############################################################################
 ## Lib definition.
 ## #############################################################################
+
+message("${PROJECT_NAME}_QRC ${${PROJECT_NAME}_QRC}")
 
 qt4_add_resources(${PROJECT_NAME}_QRC
   ${${PROJECT_NAME}_QRC}
