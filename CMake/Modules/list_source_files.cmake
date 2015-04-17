@@ -33,8 +33,8 @@ foreach(dir ${ARGV})
 
   file(GLOB HEADERS
     ${dir}/*.h
-  ${dir}/*.hpp
-  ${dir}/*.hxx
+    ${dir}/*.hpp
+    ${dir}/*.hxx
     )
   set(${project_name}_HEADERS
     ${HEADERS}
@@ -49,6 +49,7 @@ foreach(dir ${ARGV})
   file(GLOB SOURCES
     ${dir}/*.cxx
     ${dir}/*.cpp
+    ${dir}/*.c
     )
   set(${project_name}_SOURCES
     ${SOURCES}

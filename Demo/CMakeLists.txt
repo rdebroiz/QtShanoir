@@ -2,16 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 
 project(qtshanoir-demo)
 
-add_definitions(-g -Wno-deprecated)
-
-# find_package(QTSHANOIR REQUIRED)
-# if (QTSHANOIR_FOUND)
-#   include(${QTSHANOIR_USE_FILE})
-# endif (QTSHANOIR_FOUND)
-
-
-message("qtshanoir_INCLUDE_DIRS from Demo ${qtshanoir_INCLUDE_DIRS}")
-
 ## #############################################################################
 ## List Sources
 ## #############################################################################
@@ -36,7 +26,7 @@ include_directories(${${PROJECT_NAME}_INCLUDE_DIRS}
 ## Lib definition.
 ## #############################################################################
 
-qt5_wrap_ui(${PROJECT_NAME}_UI
+qt4_wrap_ui(${PROJECT_NAME}_UI
   ${${PROJECT_NAME}_UI}
   )
 
@@ -46,11 +36,7 @@ add_executable(${PROJECT_NAME}
   )
 
 target_link_libraries(${PROJECT_NAME}
-  Qt5::Core
-  Qt5::Widgets
-  Qt5::Network
-  Qt5::Xml
-  ${QUAZIP_LIBRARIES}
+  ${QT_LIBRARIES}
   qtshanoir
   )
 

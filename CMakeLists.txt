@@ -39,13 +39,11 @@ include(set_exe_install_rules)
 ## Find packages.
 ## #############################################################################
 
-# Find the QtWidgets library
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Xml REQUIRED)
-
-find_package(QuaZip REQUIRED)
+# Find the Qt library
+find_package(Qt4 REQUIRED)
+include(${QT_USE_FILE})
+set(QT_USE_QTNETWORK TRUE)
+set(QT_USE_QTXML TRUE)
 
 ## #############################################################################
 ## Qt Automoc
@@ -58,8 +56,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 ## #############################################################################
-## Configure the lib
+## Configure libs
 ## #############################################################################
+
+add_subdirectory(QuaZip)
 
 add_subdirectory(Code)
 

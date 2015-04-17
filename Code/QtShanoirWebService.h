@@ -28,8 +28,8 @@
 #include <QTextStream>
 #include <QtXml/QDomDocument>
 #include <QMessageBox>
-#include <QNetworkReply>
-#include <QSslConfiguration>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QSslConfiguration>
 #include <QtSoap.h>
 
 #include <QThread>

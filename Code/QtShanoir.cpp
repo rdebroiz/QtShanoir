@@ -22,15 +22,15 @@
 #include <QtShanoirTreeWidget.h>
 #include <QtShanoirProgressWidget.h>
 #include <QtShanoirSettingsWidget.h>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QSslConfiguration>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QSslConfiguration>
 
 #include "QtShanoirWebService.h"
 #include "QtShanoirUploadWidget.h"
 
-#include <quazip/quazip.h>
-#include <quazip/quazipfile.h>
+#include <quazip.h>
+#include <quazipfile.h>
 
 QtShanoir * QtShanoir::_instance = 0;
 
