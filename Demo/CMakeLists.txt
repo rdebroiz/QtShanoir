@@ -1,36 +1,57 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(QTSHANOIRDEMO)
+project(qtshanoir-demo)
 
 add_definitions(-g -Wno-deprecated)
 
-set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${QTSHANOIRDEMO_SOURCE_DIR}")
-set (QTSHANOIR_DIR "${QTSHANOIR_BINARY_DIR}")
+# find_package(QTSHANOIR REQUIRED)
+# if (QTSHANOIR_FOUND)
+#   include(${QTSHANOIR_USE_FILE})
+# endif (QTSHANOIR_FOUND)
 
-find_package(QTSHANOIR REQUIRED)
-if (QTSHANOIR_FOUND)
-  include(${QTSHANOIR_USE_FILE})
-endif (QTSHANOIR_FOUND)
 
-set(DEMO_SRCS
-  ${QTSHANOIRDEMO_SOURCE_DIR}/main.cpp
-  ${QTSHANOIRDEMO_SOURCE_DIR}/Demo.cpp
-)
+message("qtshanoir_INCLUDE_DIRS from Demo ${qtshanoir_INCLUDE_DIRS}")
 
-set(DEMO_HDRS
-  ${QTSHANOIRDEMO_SOURCE_DIR}/Demo.h
-)
+## #############################################################################
+## List Sources
+## #############################################################################
 
-set(DEMO_UIS
-  ${QTSHANOIRDEMO_SOURCE_DIR}/demo.ui
-)
+list_source_files(${PROJECT_NAME}
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  )
 
-set(DEMO_MOC_HDRS ${DEMO_HDRS})
+## #############################################################################
+## include directorie.
+## #############################################################################
 
-qt4_wrap_ui( DEMO_UI_HDRS ${DEMO_UIS})
-qt4_wrap_cpp( DEMO_MOC_SRCS ${DEMO_MOC_HDRS})
+list_header_directories_to_include(${PROJECT_NAME}
+  ${${PROJECT_NAME}_HEADERS}
+  )
 
-include_directories(${CMAKE_BINARY_DIR} ${QTSHANOIR_INCLUDE_DIR} ${QTSHANOIR_DIR} ${QTSHANOIRDEMO_SOURCE_DIR} ${QTSHANOIRDEMO_BINARY_DIR})
+include_directories(${${PROJECT_NAME}_INCLUDE_DIRS}
+  ${qtshanoir_INCLUDE_DIRS}
+  )
 
-add_executable( qtshanoirdemo ${DEMO_SRCS} ${DEMO_MOC_SRCS} ${DEMO_UI_HDRS})
-target_link_libraries( qtshanoirdemo  ${QTSHANOIR_LIBS} ${QT_LIBRARIES} ${QT_QTNETWORK_LIBRARY}  ${QT_QTXML_LIBRARY})
+## #############################################################################
+## Lib definition.
+## #############################################################################
+
+qt5_wrap_ui(${PROJECT_NAME}_UI
+  ${${PROJECT_NAME}_UI}
+  )
+
+add_executable(${PROJECT_NAME}
+  ${${PROJECT_NAME}_CFILES}
+  ${${PROJECT_NAME}_UI}
+  )
+
+target_link_libraries(${PROJECT_NAME}
+  Qt5::Core
+  Qt5::Widgets
+  Qt5::Network
+  Qt5::Xml
+  ${QUAZIP_LIBRARIES}
+  qtshanoir
+  )
+
+set_exe_install_rules(${PROJECT_NAME})

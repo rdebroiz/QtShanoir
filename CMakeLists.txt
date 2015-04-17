@@ -32,6 +32,7 @@ set(CMAKE_MODULE_PATH
 include(list_source_files)
 include(list_header_directories_to_include)
 include(set_lib_install_rules)
+include(set_exe_install_rules)
 
 
 ## #############################################################################
@@ -42,6 +43,7 @@ include(set_lib_install_rules)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
+find_package(Qt5Xml REQUIRED)
 
 find_package(QuaZip REQUIRED)
 
@@ -56,7 +58,19 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 ## #############################################################################
-## Configure the application
+## Configure the lib
 ## #############################################################################
 
 add_subdirectory(Code)
+
+## #############################################################################
+## Configure the demo
+## #############################################################################
+
+message("${PROJECT_NAME}_INCLUDE_DIRS from Main ${${PROJECT_NAME}_INCLUDE_DIRS}")
+
+option(BUILD_DEMO "Build example application" OFF)
+
+if(BUILD_DEMO)
+  add_subdirectory(Demo)
+endif(BUILD_DEMO)

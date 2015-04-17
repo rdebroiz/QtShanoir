@@ -8,9 +8,6 @@ list_source_files(${PROJECT_NAME}
   ${CMAKE_CURRENT_SOURCE_DIR}
   )
 
-message("${PROJECT_NAME}_HEADERS ${${PROJECT_NAME}_HEADERS}")
-message("QUAZIP_LIBRARIES ${QUAZIP_LIBRARIES}")
-
 ## #############################################################################
 ## include directorie.
 ## #############################################################################
@@ -20,9 +17,15 @@ list_header_directories_to_include(${PROJECT_NAME}
   )
 
 include_directories(${${PROJECT_NAME}_INCLUDE_DIRS}
-  ${QUAZIP_LIBRARIES}
   ${QUAZIP_INCLUDE_DIRS}
   )
+
+set(${PROJECT_NAME}_INCLUDE_DIRS
+  ${${PROJECT_NAME}_INCLUDE_DIRS}
+  ${CMAKE_CURRENT_BINARY_DIR}
+  PARENT_SCOPE)
+
+message("${${PROJECT_NAME}_INCLUDE_DIRS} from lib ${${PROJECT_NAME}_INCLUDE_DIRS}")
 
 ## #############################################################################
 ## Lib definition.

@@ -29,7 +29,7 @@ class DemoPrivate
 Demo::Demo(QWidget * parent) :
     d(new DemoPrivate)
 {
-    Q_INIT_RESOURCE(qtshanoir);
+//    Q_INIT_RESOURCE(qtshanoir);
     setupUi(this);
     QtShanoir::instance()->attachProgressWidget(progressWidget);
     QtShanoir::instance()->attachTreeWidget(treeWidget);

@@ -37,3 +37,4 @@ class QtShanoirProgressWidget : public QWidget, public Ui::QtShanoirProgress
 };
 
 #endif /* QTSHANOIRPROGRESSWIDGET_H_ */
+
