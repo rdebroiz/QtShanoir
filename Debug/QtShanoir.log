@@ -1,0 +1,46 @@
+﻿Build started 16/04/2015 10:03:49.
+     1>Project "C:\Users\whakem\Documents\QtShanoir\QtShanoir.vcxproj" on node 2 (rebuild target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\QtShanoir.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt code\QtShanoir.cpp code\QtShanoirProgressWidget.cpp code\QtShanoirSearchWidget.cpp code\QtShanoirSettings.cpp code\QtShanoirSettingsWidget.cpp code\QtShanoirTreeWidget.cpp code\QtShanoirUploadWidget.cpp code\QtShanoirWebService.cpp code\QtSoap.cpp code\quazip\JlCompress.cpp code\quazip\quaadler32.cpp code\quazip\quacrc32.cpp code\quazip\quazip.cpp code\quazip\quazipfile.cpp code\quazip\quazipnewinfo.cpp demo\Demo.cpp demo\main.cpp
+         main.cpp
+     1>demo\main.cpp(20): fatal error C1083: Cannot open include file: 'QApplication': No such file or directory
+         Demo.cpp
+     1>demo\Demo.cpp(20): fatal error C1083: Cannot open include file: 'Demo.h': No such file or directory
+         quazipnewinfo.cpp
+     1>code\quazip\quazipnewinfo.cpp(32): fatal error C1083: Cannot open include file: 'QFileInfo': No such file or directory
+         quazipfile.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\quazip\quazipfile.h(36): fatal error C1083: Cannot open include file: 'QIODevice': No such file or directory
+         quazip.cpp
+     1>code\quazip\quazip.cpp(33): fatal error C1083: Cannot open include file: 'QFile': No such file or directory
+         quacrc32.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\quazip\quachecksum32.h(4): fatal error C1083: Cannot open include file: 'QByteArray': No such file or directory
+         quaadler32.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\quazip\quaadler32.h(4): fatal error C1083: Cannot open include file: 'QByteArray': No such file or directory
+         JlCompress.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\quazip\quazip.h(36): fatal error C1083: Cannot open include file: 'QString': No such file or directory
+         QtSoap.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\QtSoap.h(49): fatal error C1083: Cannot open include file: 'QtCore/QString': No such file or directory
+         QtShanoirWebService.cpp
+     1>c:\users\whakem\documents\qtshanoir\code\QtShanoirWebService.h(23): fatal error C1083: Cannot open include file: 'QSettings': No such file or directory
+         QtShanoirUploadWidget.cpp
+     1>code\QtShanoirUploadWidget.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirUploadWidget.h': No such file or directory
+         QtShanoirTreeWidget.cpp
+     1>code\QtShanoirTreeWidget.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirTreeWidget.h': No such file or directory
+         QtShanoirSettingsWidget.cpp
+     1>code\QtShanoirSettingsWidget.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirSettingsWidget.h': No such file or directory
+         QtShanoirSettings.cpp
+     1>code\QtShanoirSettings.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirSettings.h': No such file or directory
+         QtShanoirSearchWidget.cpp
+     1>code\QtShanoirSearchWidget.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirSearchWidget.h': No such file or directory
+         QtShanoirProgressWidget.cpp
+     1>code\QtShanoirProgressWidget.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoirProgressWidget.h': No such file or directory
+         QtShanoir.cpp
+     1>code\QtShanoir.cpp(20): fatal error C1083: Cannot open include file: 'QtShanoir.h': No such file or directory
+         Generating Code...
+     1>Done Building Project "C:\Users\whakem\Documents\QtShanoir\QtShanoir.vcxproj" (rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.77

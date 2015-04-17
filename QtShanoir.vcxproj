@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="code\QtShanoir.cpp" />
+    <ClCompile Include="code\QtShanoirProgressWidget.cpp" />
+    <ClCompile Include="code\QtShanoirSearchWidget.cpp" />
+    <ClCompile Include="code\QtShanoirSettings.cpp" />
+    <ClCompile Include="code\QtShanoirSettingsWidget.cpp" />
+    <ClCompile Include="code\QtShanoirTreeWidget.cpp" />
+    <ClCompile Include="code\QtShanoirUploadWidget.cpp" />
+    <ClCompile Include="code\QtShanoirWebService.cpp" />
+    <ClCompile Include="code\QtSoap.cpp" />
+    <ClCompile Include="code\quazip\ioapi.c" />
+    <ClCompile Include="code\quazip\JlCompress.cpp" />
+    <ClCompile Include="code\quazip\quaadler32.cpp" />
+    <ClCompile Include="code\quazip\quacrc32.cpp" />
+    <ClCompile Include="code\quazip\quazip.cpp" />
+    <ClCompile Include="code\quazip\quazipfile.cpp" />
+    <ClCompile Include="code\quazip\quazipnewinfo.cpp" />
+    <ClCompile Include="code\quazip\unzip.c" />
+    <ClCompile Include="code\quazip\zip.c" />
+    <ClCompile Include="demo\Demo.cpp" />
+    <ClCompile Include="demo\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\QtShanoir.h" />
+    <ClInclude Include="code\QtShanoirProgressWidget.h" />
+    <ClInclude Include="code\QtShanoirSearchWidget.h" />
+    <ClInclude Include="code\QtShanoirSettings.h" />
+    <ClInclude Include="code\QtShanoirSettingsWidget.h" />
+    <ClInclude Include="code\QtShanoirTreeWidget.h" />
+    <ClInclude Include="code\QtShanoirUploadWidget.h" />
+    <ClInclude Include="code\QtShanoirWebService.h" />
+    <ClInclude Include="code\QtSoap.h" />
+    <ClInclude Include="code\quazip\crypt.h" />
+    <ClInclude Include="code\quazip\ioapi.h" />
+    <ClInclude Include="code\quazip\JlCompress.h" />
+    <ClInclude Include="code\quazip\quaadler32.h" />
+    <ClInclude Include="code\quazip\quachecksum32.h" />
+    <ClInclude Include="code\quazip\quacrc32.h" />
+    <ClInclude Include="code\quazip\quazip.h" />
+    <ClInclude Include="code\quazip\quazipfile.h" />
+    <ClInclude Include="code\quazip\quazipfileinfo.h" />
+    <ClInclude Include="code\quazip\quazipnewinfo.h" />
+    <ClInclude Include="code\quazip\unzip.h" />
+    <ClInclude Include="code\quazip\zip.h" />
+    <ClInclude Include="demo\Demo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="documentation\doxygen\footer.html" />
+    <None Include="documentation\doxygen\header.html" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
