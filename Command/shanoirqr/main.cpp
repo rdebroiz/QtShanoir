@@ -39,7 +39,8 @@ static const char USAGE[] =
 R"(shanoirqr
 
     Usage:
-      shanoirqr (-i <ini_file> | <login> <password> <host> [--port <port_number>] [--truststore <things>]) [-q <level:filter>]...
+      shanoirqr (-i <ini_file> | <login> <password> <host> [--port <port_number>] [--truststore <things>])
+        ( -l <level> ) [-q <level:filter>]...
       shanoirqr (-h | --help)
       shanoirqr --version
 
@@ -47,8 +48,9 @@ R"(shanoirqr
       -h --help            Show this screen.
       --port port_number   Port used to be connected to the shanoir server [default: 0]
       --truststore things  Truststore thing [default: ""]
-      -i                   ini configuration file for all connection stuff. [default: ""]
-      -q level:filter      Querry to send to shanoir, must look likes [level:filter], level beeing in [study, patient, dataset]
+      -i ini_file          ini configuration file for all connection stuff. [default: ""]
+      -l level             Level to display in the terminal must be in [study, subject, exam, dataset]
+      -q level:filter      Querry to send to shanoir, must look likes [level:filter], level beeing in [study, subject, exam, dataset]
       --version            Show version.
 )";
 
@@ -71,9 +73,9 @@ int main(int argc, const char** argv)
 
     arguments a;
 
-    if(! args["<ini_file>"].asString().empty())
+    if(! args["-i"].asString().empty())
     {
-        QString settings_filename = QString::fromUtf8(args["<ini_file>"].asString().c_str());
+        QString settings_filename = QString::fromUtf8(args["-i"].asString().c_str());
         QSettings settings(settings_filename, QSettings::IniFormat);
 
         settings.beginGroup("Users");
@@ -107,11 +109,14 @@ int main(int argc, const char** argv)
         }
     }
 
+    a.displayLevel = QString::fromUtf8(args["-l"].asString().c_str());
+
     qDebug() << "login: " << a.login;
     qDebug() << "password: " << a.password;
     qDebug() << "host: " << a.host;
     qDebug() << "port: " << a.port;
     qDebug() << "truststore: " << a.truststore;
+    qDebug() << "displayLevel: " << a.displayLevel;
 
     shanoirqr *task = new shanoirqr(&app);
     task->setArgs(a);
