@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.2)
 project(qtshanoir)
 
 
@@ -55,7 +55,13 @@ set(CMAKE_AUTOMOC ON)
 #   (nedded for generated files)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 message("automoc")
-#SET (BUILD_SHARED_LIBS  TRUE)
+
+## #############################################################################
+## enable c++ 11
+## #############################################################################
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 ## #############################################################################

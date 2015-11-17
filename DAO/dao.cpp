@@ -69,6 +69,18 @@ DAO_EXPORT QMap<int,QString> findExamList(int idStudy, int idSubject)
     return tree->getExamList(idStudy, idSubject);
 }
 
+DAO_EXPORT QMap<int,QString> findExamListf(int idStudy, int idSubject, QString examFilter)
+{
+    QMap<int,QString> allExam = findExamList(idStudy, idSubject);
+    for(QString exam : allExam.values())
+    {
+        if(!exam.contains(examFilter))
+            allExam.remove(allExam.key(exam));
+    }
+    return allExam;
+}
+
+
 
 DAO_EXPORT QMap<int,QString> findDatasetList(int idStudy,int idSubject,int idExam)
 {
@@ -79,6 +91,19 @@ DAO_EXPORT QMap<int,QString> findDatasetList(int idStudy,int idSubject,int idExa
     }
     return tree->getDatasetList(idStudy,idSubject,idExam);
 }
+
+
+DAO_EXPORT QMap<int,QString> findDatasetListf(int idStudy, int idSubject, int idExam, QString datasetFilter)
+{
+    QMap<int,QString> allDataSet = findDatasetList(idStudy, idSubject, idExam);
+    for(QString dataset : allDataSet.values())
+    {
+        if(!dataset.contains(datasetFilter))
+            allDataSet.remove(allDataSet.key(dataset));
+    }
+    return allDataSet;
+}
+
 
 DAO_EXPORT QMap<int,QString>  findProcessList(int idStudy,int idSubject,int idExam, int idDataset)
 {

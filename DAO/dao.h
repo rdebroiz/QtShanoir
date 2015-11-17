@@ -94,7 +94,9 @@ typedef DAO_EXPORT struct ProcessedDatasetFilesAndAttributes
     DAO_EXPORT QMap<int,QString>  findStudyList(QString studyFilter);//QRegExp
     DAO_EXPORT QMap<int,QString>  findSubjectList(QString study,QString subjectFilter);//filter
     DAO_EXPORT QMap<int,QString>  findExamList(int,int);//filter
+    DAO_EXPORT QMap<int,QString>  findExamListf(int,int, QString examFilter);
     DAO_EXPORT QMap<int,QString>  findDatasetList(int,int,int);
+    DAO_EXPORT QMap<int,QString>  findDatasetListf(int,int,int, QString examFilter);
     DAO_EXPORT QMap<int,QString>  findProcessList(int,int,int,int);
     DAO_EXPORT QMap<int,QString>  findProcessedDatasetList(int,int,int,int,int);
     DAO_EXPORT struct Study* getStudyDetails(QString);
