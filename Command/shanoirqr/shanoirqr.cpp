@@ -87,10 +87,6 @@ void shanoirqr::start()
                                         std::cout  << "\t\tDataset name:" << datasetMap[dataset].toStdString() << "\t|\tdb key: "<< dataset << std::endl;
                                         if(!m_args.download.isEmpty())
                                         {
-//                                            QString filename = m_args.download +  QString::number(study) + "_" +
-//                                                               QString::number(patient) + "_" +
-//                                                               QString::number(exam) + "_" +
-//                                                               + dataset;
                                             downloadFile(datasetMap[dataset], m_args.download);
                                         }
                                     }

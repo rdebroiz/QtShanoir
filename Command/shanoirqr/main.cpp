@@ -39,7 +39,7 @@ static const char USAGE[] =
 R"(shanoirqr
 
     Usage:
-      shanoirqr (-i <ini_file> | <login> <password> <host> [--port <port_number>] [--truststore <things>]) [-q <level:filter>]... -d <path>
+      shanoirqr (-i <ini_file> | <login> <password> <host> [--port <port_number>] [--truststore <things>]) [-q <level:filter>]... [-d <path>]
       shanoirqr (-h | --help)
       shanoirqr --version
 
