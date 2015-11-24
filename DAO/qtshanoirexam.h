@@ -24,9 +24,12 @@ public:
     QDate getDate();
     void setDate(QDate);
     QtShanoirDataset& getDatasetById(int id);
+
     void insertDataset(QtShanoirDataset);
     void displayDatasetList();
     QMap<int,QString> getDatasetList();
+    QMap<int,QString> getDatasetListByField(const QString & field);
+
 };
 
 #endif // QTSHANOIREXAM

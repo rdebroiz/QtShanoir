@@ -1,5 +1,5 @@
 #include "dao.h"
-
+#include <iostream>
 DAO_EXPORT void configureSettings(QString filename)
 {
     GlobalData::settings.loadSettings(filename);
@@ -64,7 +64,7 @@ DAO_EXPORT QMap<int,QString> findExamList(int idStudy, int idSubject)
     qDebug() << "findExamList";
     if (tree->getExamList(idStudy,idSubject).isEmpty())
     {
-         tree->acquireRefreshExamList(idStudy,idSubject);
+        tree->acquireRefreshExamList(idStudy,idSubject);
     }
     return tree->getExamList(idStudy, idSubject);
 }
@@ -104,6 +104,65 @@ DAO_EXPORT QMap<int,QString> findDatasetListf(int idStudy, int idSubject, int id
     return allDataSet;
 }
 
+
+DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubject, int idExam, std::vector<std::pair<QString,QString>> datasetFilter)
+{
+
+    //QMap<int,std::vector<QString>> res;
+
+    //std::vector<QMap<int,QString>> allMaps;
+
+
+
+    if (tree->getDatasetList(idStudy,idSubject,idExam).isEmpty())
+    {
+        tree->acquireRefreshDatasetList(idStudy, idSubject, idExam);
+    }
+
+    QList<int> finalKey;
+    bool firstRound=true;
+    for( auto elt:datasetFilter)
+    {
+        auto queryField=elt.first;
+        auto fieldValue=elt.second;
+        QMap<int,QString> allDataSet = tree->getDatasetList(idStudy, idSubject, idExam,queryField);
+        for(QString dataset : allDataSet.values())
+        {
+            if(!dataset.contains(fieldValue))
+                allDataSet.remove(allDataSet.key(dataset));
+        }
+        auto keys=allDataSet.keys();
+        if(firstRound)
+            {finalKey=keys;firstRound=false;}
+        else
+        {auto it=std::set_intersection(keys.begin(),keys.end(),finalKey.begin(),finalKey.end(),finalKey.begin());finalKey.erase(it,finalKey.end());}
+    }
+
+
+
+    return finalKey;
+}
+
+/*
+DAO_EXPORT QMap<int,QString> findDatasetListf(int idStudy, int idSubject, int idExam, std::vector<std::pair<QString,QString>> datasetFilter)
+{
+    qDebug() << "findDatasetList";
+    if (tree->getDatasetList(idStudy,idSubject,idExam).isEmpty())
+    {
+        tree->acquireRefreshDatasetList(idStudy, idSubject, idExam);
+    }
+    return tree->getDatasetList(idStudy,idSubject,idExam);
+
+
+
+    QMap<int,QString> allDataSet = findDatasetList(idStudy, idSubject, idExam);
+    for(QString dataset : allDataSet.values())
+    {
+        if(!dataset.contains(datasetFilter))
+            allDataSet.remove(allDataSet.key(dataset));
+    }
+    return allDataSet;
+}*/
 
 DAO_EXPORT QMap<int,QString>  findProcessList(int idStudy,int idSubject,int idExam, int idDataset)
 {
@@ -152,6 +211,12 @@ DAO_EXPORT struct Exam* getExamDetails(int idStudy, int idSubject, int idExam)
     return str_exam;
 }
 
+DAO_EXPORT QtShanoirDataset getShanoirDataSet(int idStudy, int idSubject, int idExam, int idDataset)
+{
+    return tree->getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).getDatasetById(idDataset);
+}
+
+
 DAO_EXPORT struct Dataset* getDatasetDetails(int idStudy, int idSubject, int idExam, int idDataset)
 {
     struct Dataset* str_dataset = new struct Dataset;
@@ -162,6 +227,7 @@ DAO_EXPORT struct Dataset* getDatasetDetails(int idStudy, int idSubject, int idE
     str_dataset->repetitionTime = cl_dataset.getRepetitionTime();
     str_dataset->flipAngle = cl_dataset.getFlipAngle();
     str_dataset->echoTime = cl_dataset.getEchoTime();
+    str_dataset->filter = cl_dataset.getFilter();
     return str_dataset;
 }
 
@@ -225,7 +291,7 @@ DAO_EXPORT QMap<int,QString> getProcessingList()
         parse->parseProcessingList(xmlSerializer,upload);
 
     }
-   return upload->getProcessingList();
+    return upload->getProcessingList();
 }
 
 DAO_EXPORT QStringList getDatasetTypeList()

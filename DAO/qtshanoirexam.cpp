@@ -72,3 +72,14 @@ QMap<int,QString> QtShanoirExam::getDatasetList()
     }
     return list;
 }
+
+QMap<int,QString> QtShanoirExam::getDatasetListByField(const QString & field)
+{
+    QMap<int,QString> list;
+    for (int i=0; i<datasetList.size();i++)
+    {
+       // if (filter.exactMatch(studyList.value(i).getName()))
+           list.insert(datasetList.value(i).getId(),datasetList.value(i).getField(field));
+    }
+    return list;
+}

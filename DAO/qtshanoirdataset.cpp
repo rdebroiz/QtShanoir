@@ -15,6 +15,19 @@ QString QtShanoirDataset::getName()
     return this->name;
 }
 
+QString QtShanoirDataset::getField(const QString & field)
+{
+     if(field=="name")
+     {return getName();}
+     if(field=="filter")
+     {return getFilter();}
+   //  if(field=="echoNumber")
+   //  {return QString(getEchoTime());}
+
+     return "";
+
+}
+
 void QtShanoirDataset::setName(QString name)
 {
     this->name = name;
@@ -58,6 +71,16 @@ float QtShanoirDataset::getFlipAngle()
 void QtShanoirDataset::setFlipAngle(float angle)
 {
     this->flipAngle = angle;
+}
+
+QString QtShanoirDataset::getFilter()
+{
+    return this->filter;
+}
+
+void QtShanoirDataset::setFilter(QString filterName)
+{
+    this->filter = filterName;
 }
 
 float QtShanoirDataset::getEchoTime()

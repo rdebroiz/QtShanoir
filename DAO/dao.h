@@ -51,6 +51,7 @@ typedef DAO_EXPORT struct Dataset
     QString name;
     QDate creationDate;
     QString comment;
+    QString filter;
     float repetitionTime;
     float flipAngle;
     float echoTime;
@@ -97,6 +98,8 @@ typedef DAO_EXPORT struct ProcessedDatasetFilesAndAttributes
     DAO_EXPORT QMap<int,QString>  findExamListf(int,int, QString examFilter);
     DAO_EXPORT QMap<int,QString>  findDatasetList(int,int,int);
     DAO_EXPORT QMap<int,QString>  findDatasetListf(int,int,int, QString examFilter);
+    DAO_EXPORT QList<int> findDatasetListFilterFromField(int,int,int,std::vector<std::pair<QString,QString>> datasetFilter);
+
     DAO_EXPORT QMap<int,QString>  findProcessList(int,int,int,int);
     DAO_EXPORT QMap<int,QString>  findProcessedDatasetList(int,int,int,int,int);
     DAO_EXPORT struct Study* getStudyDetails(QString);
@@ -105,6 +108,10 @@ typedef DAO_EXPORT struct ProcessedDatasetFilesAndAttributes
     DAO_EXPORT struct Dataset* getDatasetDetails(int,int,int,int);
     DAO_EXPORT struct Process* getProcessDetails(int,int,int,int,int);
     DAO_EXPORT struct ProcessedDataset* getProcessedDatasetDetails(int,int,int,int,int,int);
+
+
+    DAO_EXPORT QtShanoirDataset getShanoirDataSet(int , int , int , int );
+
 
     DAO_EXPORT void downloadFile(QString,QString);
 

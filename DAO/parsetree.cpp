@@ -5,6 +5,7 @@
 #include "qtshanoirtree.h"
 #include "qtshanoirexam.h"
 
+#include <iostream>
 
 ParseTree::ParseTree()
 {
@@ -87,10 +88,12 @@ void ParseTree::parseDataset(QString xmlserializer, int idStudy, int idSubject, 
     doc.removeChild(doc.firstChild());
 
     QDomNode el = doc.firstChild().firstChildElement("datasetResultList");
-
     while (!el.isNull())
     {
         QtShanoirDataset dataset;
+
+       //std::cout<<doc.toString()<<std::endl;
+
         dataset.setId(el.firstChildElement("id").firstChild().nodeValue().toInt());
         dataset.setName(el.firstChildElement("name").firstChild().nodeValue());
         dataset.setCreationDate(QDate::fromString(el.firstChildElement("datasetCreationDate").firstChild().nodeValue(),Qt::ISODate));
@@ -98,7 +101,7 @@ void ParseTree::parseDataset(QString xmlserializer, int idStudy, int idSubject, 
         dataset.setFlipAngle(el.firstChildElement("flipAngle").firstChildElement("flipAngleValue").firstChild().nodeValue().toFloat());
         dataset.setRepetitionTime(el.firstChildElement("repetitionTime").firstChildElement("repetitionTimeValue").firstChild().nodeValue().toFloat());
         dataset.setEchoTime(el.firstChildElement("echoTime").firstChildElement("echoTimeValue").firstChild().nodeValue().toFloat());
-
+        dataset.setFilter(el.firstChildElement("mrDatasetAcquisition").firstChildElement("mrProtocol").firstChildElement("filters").firstChild().nodeValue());
         tree->getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).insertDataset(dataset);
 
 

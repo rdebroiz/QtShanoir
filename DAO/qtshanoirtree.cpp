@@ -205,10 +205,17 @@ QMap<int,QString> QtShanoirTree::getDatasetList(int idStudy, int idSubject, int 
     return getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).getDatasetList();
 }
 
+QMap<int,QString> QtShanoirTree::getDatasetList(int idStudy, int idSubject, int idExam,const QString & queryField)
+{
+    return getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).getDatasetListByField(queryField);
+}
+
+
 QMap<int,QString> QtShanoirTree::getProcessList(int idStudy, int idSubject, int idExam, int idDataset)
 {
     return getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).getDatasetById(idDataset).getProcessList();
 }
+
 
 QMap<int,QString> QtShanoirTree::getProcessedDatasetList(int idStudy, int idSubject, int idExam, int idDataset, int idProcess)
 {

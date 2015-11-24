@@ -26,6 +26,8 @@ public:
     QMap<int,QString> getSubjectList(QString study,QString subjectFilter);
     QMap<int,QString> getExamList(int idStudy, int idSubject);
     QMap<int,QString> getDatasetList(int idStudy, int idSubject, int idExam);
+    QMap<int,QString> getDatasetList(int idStudy, int idSubject, int idExam,const QString & queryField);
+
     QMap<int,QString> getProcessList(int idStudy, int idSubject, int idExam, int idDataset);
     QMap<int,QString> getProcessedDatasetList(int idStudy, int idSubject, int idExam, int idDataset, int idProcess);
     QtShanoirStudy& getStudyById(int);
