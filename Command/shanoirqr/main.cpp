@@ -48,13 +48,14 @@ R"(shanoirqr
       --port port_number   Port used to be connected to the shanoir server [default: 0]
       --truststore things  Truststore thing [default: ""]
       -i                   ini configuration file for all connection stuff. [default: ""]
-      -q level:filter      Querry to send to shanoir, must look likes [level:filter], level beeing in [study, patient, exam, dataset]
+      -q level:filter      Query to send to shanoir, must look likes [level:filter], level beeing in [study, patient, exam, dataset]
       -d path              Downlaod dataset found to path [default: ""]
       --version            Show version.
 )";
 
 int main(int argc, const char** argv)
 {
+
     QCoreApplication app(argc, const_cast<char **>(argv));
     qInstallMsgHandler(shMessageHandler);
 

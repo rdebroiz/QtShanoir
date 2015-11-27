@@ -17,6 +17,7 @@ private:
     float echoTime;
     QList<QtShanoirProcess> processList;
     QString filter;
+    int echoNumber;
 
 public:
     int getId();
@@ -24,7 +25,7 @@ public:
     QString getName();
 
     /**
-    As for now, possible field are name and filter...
+    As for now, possible field are name; filter; echoNumber
     */
     QString getField(const QString & field);
 
@@ -39,6 +40,8 @@ public:
     void setFlipAngle(float);
     float getEchoTime();
     void setEchoTime(float);
+    int getEchoNumber();
+    void setEchoNumber(int);
     QString getFilter();
     void setFilter(QString);
     QtShanoirProcess& getProcessById(int id);

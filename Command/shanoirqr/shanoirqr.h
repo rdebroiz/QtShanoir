@@ -18,7 +18,6 @@ struct arguments
 class shanoirqr: public QObject
 {
     Q_OBJECT
-
 public:
     shanoirqr(QObject *parent = NULL);
     virtual ~shanoirqr();

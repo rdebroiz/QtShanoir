@@ -1,5 +1,8 @@
 #include "dao.h"
 #include <iostream>
+
+
+
 DAO_EXPORT void configureSettings(QString filename)
 {
     GlobalData::settings.loadSettings(filename);
@@ -105,7 +108,7 @@ DAO_EXPORT QMap<int,QString> findDatasetListf(int idStudy, int idSubject, int id
 }
 
 
-DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubject, int idExam, std::vector<std::pair<QString,QString>> datasetFilter)
+DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubject, int idExam,const std::vector<std::pair<QString,QString>> & datasetFilter,const std::vector<MatchingType> & matchingTypeFilter)
 {
 
     //QMap<int,std::vector<QString>> res;
@@ -121,6 +124,7 @@ DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubjec
 
     QList<int> finalKey;
     bool firstRound=true;
+    unsigned int index=0;
     for( auto elt:datasetFilter)
     {
         auto queryField=elt.first;
@@ -128,7 +132,11 @@ DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubjec
         QMap<int,QString> allDataSet = tree->getDatasetList(idStudy, idSubject, idExam,queryField);
         for(QString dataset : allDataSet.values())
         {
-            if(!dataset.contains(fieldValue))
+            if(matchingTypeFilter[index]==contains && !dataset.contains(fieldValue))
+                allDataSet.remove(allDataSet.key(dataset));
+            if(matchingTypeFilter[index]==equals && !(dataset==fieldValue))
+                allDataSet.remove(allDataSet.key(dataset));
+            if(matchingTypeFilter[index]==notcontains && dataset.contains(fieldValue))
                 allDataSet.remove(allDataSet.key(dataset));
         }
         auto keys=allDataSet.keys();
@@ -136,6 +144,7 @@ DAO_EXPORT  QList<int>  findDatasetListFilterFromField(int idStudy, int idSubjec
             {finalKey=keys;firstRound=false;}
         else
         {auto it=std::set_intersection(keys.begin(),keys.end(),finalKey.begin(),finalKey.end(),finalKey.begin());finalKey.erase(it,finalKey.end());}
+        ++index;
     }
 
 

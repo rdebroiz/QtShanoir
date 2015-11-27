@@ -21,13 +21,21 @@ QString QtShanoirDataset::getField(const QString & field)
      {return getName();}
      if(field=="filter")
      {return getFilter();}
-   //  if(field=="echoNumber")
-   //  {return QString(getEchoTime());}
+    if(field=="echoNumber")
+      {return QString::number(getEchoNumber());}
 
      return "";
 
 }
 
+int QtShanoirDataset::getEchoNumber()
+{
+    return echoNumber;
+}
+void QtShanoirDataset::setEchoNumber(int number)
+{
+    this->echoNumber=number;
+}
 void QtShanoirDataset::setName(QString name)
 {
     this->name = name;

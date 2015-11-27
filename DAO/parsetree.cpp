@@ -102,6 +102,8 @@ void ParseTree::parseDataset(QString xmlserializer, int idStudy, int idSubject, 
         dataset.setRepetitionTime(el.firstChildElement("repetitionTime").firstChildElement("repetitionTimeValue").firstChild().nodeValue().toFloat());
         dataset.setEchoTime(el.firstChildElement("echoTime").firstChildElement("echoTimeValue").firstChild().nodeValue().toFloat());
         dataset.setFilter(el.firstChildElement("mrDatasetAcquisition").firstChildElement("mrProtocol").firstChildElement("filters").firstChild().nodeValue());
+        dataset.setEchoNumber(el.firstChildElement("echoTime").firstChildElement("echoNumber").firstChild().nodeValue().toInt());
+
         tree->getStudyById(idStudy).getSubjectById(idSubject).getExamById(idExam).insertDataset(dataset);
 
 

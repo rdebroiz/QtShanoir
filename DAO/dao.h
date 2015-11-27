@@ -16,6 +16,7 @@
 #else
 #  define DAO_EXPORT 
 #endif
+enum MatchingType {contains,equals,notcontains};
 
 extern "C"
 {
@@ -98,7 +99,7 @@ typedef DAO_EXPORT struct ProcessedDatasetFilesAndAttributes
     DAO_EXPORT QMap<int,QString>  findExamListf(int,int, QString examFilter);
     DAO_EXPORT QMap<int,QString>  findDatasetList(int,int,int);
     DAO_EXPORT QMap<int,QString>  findDatasetListf(int,int,int, QString examFilter);
-    DAO_EXPORT QList<int> findDatasetListFilterFromField(int,int,int,std::vector<std::pair<QString,QString>> datasetFilter);
+    DAO_EXPORT QList<int> findDatasetListFilterFromField(int,int,int,const std::vector<std::pair<QString,QString>>& datasetFilter,const std::vector<MatchingType> & matchingTypeVector);
 
     DAO_EXPORT QMap<int,QString>  findProcessList(int,int,int,int);
     DAO_EXPORT QMap<int,QString>  findProcessedDatasetList(int,int,int,int,int);

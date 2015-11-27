@@ -15,6 +15,7 @@ shanoirqr::~shanoirqr()
 }
 void shanoirqr::start()
 {
+
     GlobalData::settings.setLogin(m_args.login);
     GlobalData::settings.setPassword(m_args.password);
     GlobalData::settings.setHost(m_args.host);
@@ -22,6 +23,8 @@ void shanoirqr::start()
     GlobalData::settings.setTrustore(m_args.truststore);
 
     authentification();
+
+
 
     if(m_args.filter.isEmpty())
     {
@@ -35,20 +38,45 @@ void shanoirqr::start()
     {
         QStringList studyFilterList, patientFilterList, examFilterList, datasetFilterList;
         std::vector<std::pair<QString,QString>> freeLabelList;
+        std::vector<MatchingType> matchingTypeVector;
 
         for(QString filter : m_args.filter)
         {
-            QString lvl = filter.split(":")[0];
+            QString keyCharacter=":";
+
+
+            QString lvl = filter.split(keyCharacter)[0];
 
             if(lvl == "study")
-                studyFilterList << filter.split(":")[1];
+                studyFilterList << filter.split(keyCharacter)[1];
             else if(lvl == "patient")
-                patientFilterList << filter.split(":")[1];
+                patientFilterList << filter.split(keyCharacter)[1];
             else if(lvl == "exam")
-                examFilterList << filter.split(":")[1];
+                examFilterList << filter.split(keyCharacter)[1];
             else if(lvl == "dataset")
-                datasetFilterList << filter.split(":")[1];
-            else {freeLabelList.push_back(std::make_pair(filter.split(":")[0],filter.split(":")[1]));}
+                datasetFilterList << filter.split(keyCharacter)[1];
+            else {
+
+                if(filter.contains(":"))
+                {
+                  keyCharacter=":";
+                  matchingTypeVector.push_back(contains);
+                }
+                else if(filter.contains("="))
+                {
+                    keyCharacter="=";
+                    matchingTypeVector.push_back(equals);
+                }
+                else if(filter.contains("!"))
+                {
+                    keyCharacter="!";
+                    matchingTypeVector.push_back(notcontains);
+                }
+
+                freeLabelList.push_back(std::make_pair(filter.split(keyCharacter)[0],filter.split(keyCharacter)[1]));
+
+            }
+
         }
 
         if(studyFilterList.isEmpty())
@@ -98,19 +126,17 @@ void shanoirqr::start()
                                 }
                                 if(freeLabelList.size()!=0)
                                 {
-                                    auto keys=findDatasetListFilterFromField(study,patient,exam,freeLabelList);
-                                    std::cout<<keys.size()<<std::endl;
+                                    auto keys=findDatasetListFilterFromField(study,patient,exam,freeLabelList,matchingTypeVector);
                                     for(int dataset : keys)
                                     {
-
                                         QtShanoirDataset dataSetForData=getShanoirDataSet(study,patient,exam,dataset);
-                                        std::cout << "\t|\td Data set: key: "<<dataset<<" matching: ";
+                                        std::cout << "\t\t Data set: key: "<<dataset<<" matching: "<<std::endl;
 
                                         for(unsigned int index=0;index<freeLabelList.size();++index)
                                         {
                                             // display all values of the matching field (only once)
                                             if(std::find_if(freeLabelList.begin(),freeLabelList.begin()+index,[&](std::pair<QString,QString> a){return(a.first==freeLabelList[index].first);})==(freeLabelList.begin()+index))
-                                            std::cout<<dataSetForData.getField(freeLabelList[index].first).toStdString()<<std::endl;
+                                                std::cout<<"\t\t\t "<<freeLabelList[index].first.toStdString()<<":"<<dataSetForData.getField(freeLabelList[index].first).toStdString()<<std::endl;
                                         }
                                         if(!m_args.download.isEmpty())
                                         {
