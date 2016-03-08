@@ -1,5 +1,6 @@
 #include "qtshanoirsettingswidget.h"
 
+#include <QMessageBox>
 
 QtShanoirSettingsWidget::QtShanoirSettingsWidget(QWidget *parent): QWidget (parent)
 {

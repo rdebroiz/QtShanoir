@@ -1,6 +1,9 @@
 #include "qtshanoiruploadwidgetdatasettypedetailstemplatedataset.h"
 #include "ui_qtshanoiruploadwidgetdatasettypedetailstemplatedataset.h"
 
+#include <QCheckBox>
+#include <QMessageBox>
+
 QtShanoirUploadWidgetDatasetTypeDetailsTemplateDataset::QtShanoirUploadWidgetDatasetTypeDetailsTemplateDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files,QWidget *parent) : QWidget(parent), ui(new Ui::QtShanoirUploadWidgetDatasetTypeDetailsTemplateDataset)
 {
     ui->setupUi(this);

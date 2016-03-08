@@ -1,6 +1,9 @@
 #include "qtshanoiruploadwidgetdatasettypedetailseegmegpetdataset.h"
 #include "ui_qtshanoiruploadwidgetdatasettypedetailseegmegpetdataset.h"
 
+#include <QCheckBox>
+#include <QMessageBox>
+
 QtShanoirUploadWidgetDatasetTypeDetailsEegMegPetDataset::QtShanoirUploadWidgetDatasetTypeDetailsEegMegPetDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files,QWidget *parent) :QWidget(parent),ui(new Ui::QtShanoirUploadWidgetDatasetTypeDetailsEegMegPetDataset)
 {
     ui->setupUi(this);

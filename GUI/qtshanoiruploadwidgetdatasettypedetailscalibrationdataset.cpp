@@ -1,6 +1,9 @@
 #include "qtshanoiruploadwidgetdatasettypedetailscalibrationdataset.h"
 #include "ui_qtshanoiruploadwidgetdatasettypedetailscalibrationdataset.h"
 
+#include <QCheckBox>
+#include <QMessageBox>
+
 QtShanoirUploadWidgetDatasetTypeDetailsCalibrationDataset::QtShanoirUploadWidgetDatasetTypeDetailsCalibrationDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QtShanoirUploadWidgetDatasetTypeDetailsCalibrationDataset)

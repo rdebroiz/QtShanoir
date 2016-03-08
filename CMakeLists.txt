@@ -1,18 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
-project(qtshanoir)
 
-
-## #############################################################################
-## Version number.
-## #############################################################################
-
-set(${PROJECT_NAME}_VERSION_MAJOR 1)
-set(${PROJECT_NAME}_VERSION_MINOR 0)
-set(${PROJECT_NAME}_VERSION_PATCH 0)
-set(${PROJECT_NAME}_VERSION
-    ${PROJECT_NAME}_VERSION_MAJOR.${PROJECT_NAME}_VERSION_MINOR.${PROJECT_NAME}_VERSION_PATCH
-    )
-add_definitions(-D${PROJECT_NAME}_VERSION="${${PROJECT_NAME}_VERSION}")
+project(qtshanoir VERSION 1.0.0)
 
 
 ## #############################################################################
@@ -40,10 +28,13 @@ include(set_exe_install_rules)
 ## #############################################################################
 
 # Find the Qt library
-find_package(Qt4 COMPONENTS QtCore QtGui QtXml QtNetwork REQUIRED)
-include(${QT_USE_FILE})
-set(QT_USE_QTNETWORK TRUE)
-set(QT_USE_QTXML TRUE)
+find_package(Qt5 REQUIRED COMPONENTS
+  Core
+  Gui
+  Network
+  Widgets
+  Xml
+  )
 
 ## #############################################################################
 ## Qt Automoc
@@ -54,7 +45,7 @@ set(CMAKE_AUTOMOC ON)
 #   Find includes in corresponding build (and source) directories
 #   (nedded for generated files)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-message("automoc")
+
 
 ## #############################################################################
 ## enable c++ 11
@@ -68,13 +59,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 ## Configure libs
 ## #############################################################################
 
-message("I'm in quazip")
-add_subdirectory(QuaZip)
-message("I'm in dao")
 add_subdirectory(DAO)
-message("I'm in gui")
 add_subdirectory(GUI)
-message("I'm in gui")
 
 ## #############################################################################
 ## Configure the demo

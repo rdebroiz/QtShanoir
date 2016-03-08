@@ -6,6 +6,8 @@
 #include <QtGui>
 #include "qtshanoiruploadprocesseddatasetattributestemp.h"
 
+#include <QTableWidgetItem>
+
 namespace Ui
 {
     class QtShanoirUploadWidgetDatasetTypeDetailsMrDataset;

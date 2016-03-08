@@ -1,6 +1,8 @@
 #include "qtshanoiruploadwidgetshowstepsdatasettypedetails.h"
 #include "ui_qtshanoiruploadwidgetshowstepsdatasettypedetails.h"
 
+#include <QLabel>
+
 QtShanoirUploadWidgetShowStepsDatasetTypeDetails::QtShanoirUploadWidgetShowStepsDatasetTypeDetails(QWidget *parent) : QWidget(parent), ui(new Ui::QtShanoirUploadWidgetShowStepsDatasetTypeDetails)
 {
     ui->setupUi(this);

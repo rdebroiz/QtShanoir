@@ -12,27 +12,32 @@
 
 #include <iostream>
 
-void shMessageHandler(QtMsgType type, const char *msg)
+void shMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QString txt;
-    switch (type) {
-    case QtDebugMsg:
-        txt = QString("Debug: %1").arg(msg);
-        break;
-    case QtWarningMsg:
-        txt = QString("Warning: %1").arg(msg);
-    break;
-    case QtCriticalMsg:
-        txt = QString("Critical: %1").arg(msg);
-    break;
-    case QtFatalMsg:
-        txt = QString("Fatal: %1").arg(msg);
-        abort();
-    }
+    QByteArray localMsg = msg.toLocal8Bit();
+    QString out;
+        switch (type)
+        {
+        case QtDebugMsg:
+            out = QString("Debug: %1 (%2:%3, %4)\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function);
+            break;
+        case QtInfoMsg:
+            out = QString("Info: %1 (%2:%3, %4)\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function);
+            break;
+        case QtWarningMsg:
+            out = QString("Warning: %1 (%2:%3, %4)\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function);
+            break;
+        case QtCriticalMsg:
+            out = QString("Critical: %1 (%2:%3, %4)\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function);
+            break;
+        case QtFatalMsg:
+            out = QString("Fatal: %1 (%2:%3, %4)\n").arg(localMsg.constData()).arg(context.file).arg(context.line).arg(context.function);
+            abort();
+        }
     QFile outFile("shanoirqr.log");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&outFile);
-    ts << txt << endl;
+    ts << out << endl;
 }
 
 static const char USAGE[] =
@@ -48,7 +53,7 @@ R"(shanoirqr
       --port port_number   Port used to be connected to the shanoir server [default: 0]
       --truststore things  Truststore thing [default: ""]
       -i                   ini configuration file for all connection stuff. [default: ""]
-      -q level:filter      Query to send to shanoir, must look likes [level:filter], level beeing in [study, patient, exam, dataset]
+      -q level:filter      Query to send to shanoir, must look likes [level[:=!]filter], level beeing in [study, patient, exam, dataset]
       -d path              Downlaod dataset found to path [default: ""]
       --version            Show version.
 )";
@@ -57,7 +62,7 @@ int main(int argc, const char** argv)
 {
 
     QCoreApplication app(argc, const_cast<char **>(argv));
-    qInstallMsgHandler(shMessageHandler);
+    qInstallMessageHandler(shMessageHandler);
 
     std::map<std::string, docopt::value> args
         = docopt::docopt(USAGE,
@@ -97,7 +102,7 @@ int main(int argc, const char** argv)
         a.login = QString::fromUtf8(args["<login>"].asString().c_str());
         a.password = QString::fromUtf8(args["<password>"].asString().c_str());
         a.host = QString::fromUtf8(args["<host>"].asString().c_str());
-        a.login = atoi(args["<port>"].asString().c_str());
+        a.port = atoi(args["<port>"].asString().c_str());
         a.truststore = QString::fromUtf8(args["<truststore>"].asString().c_str());
     }
 

@@ -2,6 +2,9 @@
 #define QTSHANOIRUPLOADWIDGETDATASETTYPEDETAILSEEGMEGPETDATASET_H
 #include <QtGui>
 #include <QWidget>
+
+#include <QTableWidgetItem>
+
 #include "qtshanoiruploadprocesseddatasetattributestemp.h"
 
 namespace Ui

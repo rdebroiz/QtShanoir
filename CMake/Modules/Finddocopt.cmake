@@ -29,4 +29,5 @@ if(docopt_INCLUDE_DIR AND
     docopt_LIBRARY_DIR
     )
     set(docopt_FOUND TRUE)
+    link_directories(${docopt_LIBRARY_DIRS})
 endif()

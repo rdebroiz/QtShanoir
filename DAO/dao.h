@@ -16,7 +16,12 @@
 #else
 #  define DAO_EXPORT 
 #endif
-enum MatchingType {contains,equals,notcontains};
+enum MatchingType
+{
+    contains,
+    equals,
+    notcontains
+};
 
 extern "C"
 {

@@ -1,6 +1,8 @@
 #include "qtshanoirdetailswidget.h"
 #include "qtshanoirstudy.h"
 
+#include <QLabel>
+
 QtShanoirDetailsWidget::QtShanoirDetailsWidget(QWidget *parent) : QWidget(parent),ui (new Ui::QtShanoirDetailsWidget)
 {
     ui->setupUi(this);

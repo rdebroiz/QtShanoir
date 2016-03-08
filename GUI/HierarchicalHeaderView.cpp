@@ -360,7 +360,7 @@ QStyleOptionHeader HierarchicalHeaderView::styleOptionForCell(int logicalInd) co
     }
 
     //qt5 change to sectionsClickable
-    if(isClickable())
+    if(sectionsClickable())
     {
 /*
         if (logicalIndex == d->hover)

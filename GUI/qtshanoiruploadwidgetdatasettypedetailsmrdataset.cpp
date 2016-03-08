@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QLibrary>
 #include <QMessageBox>
-
+#include <QCheckBox>
 
 //class MyHeader : public QHeaderView
 //{

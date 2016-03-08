@@ -5,6 +5,8 @@
 #include <QWidget>
 #include "qtshanoiruploadprocesseddatasetattributestemp.h"
 
+#include <QTableWidgetItem>
+
 namespace Ui {
 class QtShanoirUploadWidgetDatasetTypeDetailsCalibrationDataset;
 }

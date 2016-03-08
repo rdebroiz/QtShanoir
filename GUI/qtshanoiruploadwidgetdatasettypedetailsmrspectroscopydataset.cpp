@@ -1,6 +1,10 @@
 #include "qtshanoiruploadwidgetdatasettypedetailsmrspectroscopydataset.h"
 #include "ui_qtshanoiruploadwidgetdatasettypedetailsmrspectroscopydataset.h"
 
+
+#include <QCheckBox>
+#include <QMessageBox>
+
 QtShanoirUploadWidgetDatasetTypeDetailsMrSpectroscopyDataset::QtShanoirUploadWidgetDatasetTypeDetailsMrSpectroscopyDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files,QWidget *parent) : QWidget(parent), ui(new Ui::QtShanoirUploadWidgetDatasetTypeDetailsMrSpectroscopyDataset)
 {
     ui->setupUi(this);

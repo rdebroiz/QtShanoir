@@ -1,5 +1,7 @@
 #include "qtshanoiruploadwidgetdatasettypedetails.h"
 
+#include <QMessageBox>
+
 QtShanoirUploadWidgetDatasetTypeDetails::QtShanoirUploadWidgetDatasetTypeDetails(QWidget *parent):QWizardPage(parent),ui (new Ui::QtShanoirUploadWidgetDatasetTypeDetails)
 {
     ui->setupUi(this);

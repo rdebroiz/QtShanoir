@@ -4,6 +4,7 @@
 #include "qtshanoiruploadprocesseddatasetattributestemp.h"
 #include <QWidget>
 #include <QtGui>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class QtShanoirUploadWidgetDatasetTypeDetailsMrSpectroscopyDataset;

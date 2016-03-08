@@ -1,5 +1,10 @@
 #include "qtshanoirdownloadwidget.h"
 
+#include <QFileDialog>
+#include <QLineEdit>
+#include <QPushButton>
+
+
 QtShanoirDownloadWidget::QtShanoirDownloadWidget(QWidget *parent) : QWidget(parent),ui (new Ui::QtShanoirDownloadWidget)
 {
     ui->setupUi(this);

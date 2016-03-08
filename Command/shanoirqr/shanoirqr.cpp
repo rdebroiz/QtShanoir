@@ -1,10 +1,9 @@
 #include <shanoirqr.h>
-
 #include <iostream>
-
 #include <dao.h>
-
 #include <utility>
+#include <yaml-cpp/yaml.h>
+
 shanoirqr::shanoirqr(QObject *parent): QObject(parent)
 {
 
@@ -23,7 +22,6 @@ void shanoirqr::start()
     GlobalData::settings.setTrustore(m_args.truststore);
 
     authentification();
-
 
 
     if(m_args.filter.isEmpty())
@@ -90,27 +88,34 @@ void shanoirqr::start()
 
 
 
+        YAML::Emitter out;
         for(QString studyfilter : studyFilterList)
         {
             QMap<int, QString> studiesMap;
             studiesMap.unite(findStudyList(studyfilter));
+            out << YAML::BeginMap;
             for(int study : studiesMap.keys())
             {
-                std::cout  << "Study name:" << studiesMap[study].toStdString() << "\t|\tdb key: "<< study << std::endl;
+//                std::cout  << "Study name:" << studiesMap[study].toStdString() << "\t|\tdb key: "<< study << std::endl;
+                out << YAML::Key << studiesMap[study].toStdString();
                 QMap<int, QString> patientsMap;
                 for(QString patientFilter : patientFilterList)
                 {
                     patientsMap.unite(findSubjectList(studiesMap[study], patientFilter));
+                    out << YAML::Value << YAML::BeginMap;
                     for(int patient : patientsMap.keys())
                     {
-                        std::cout  << "\tPatient name:" << patientsMap[patient].toStdString() << "\t|\tdb key: "<< patient << std::endl;
+//                        std::cout  << "\tPatient name:" << patientsMap[patient].toStdString() << "\t|\tdb key: "<< patient << std::endl;
+                        out << YAML::Key << patientsMap[patient].toStdString();
                         QMap<int, QString> examMap;
                         for(QString examFilter : examFilterList)
                         {
                             examMap.unite(findExamListf(study, patient, examFilter));
+                            out << YAML::Value << YAML::BeginMap;
                             for(int exam : examMap.keys())
                             {
-                                std::cout  << "\t\tExam name:" << examMap[exam].toStdString() << "\t|\tdb key: "<< exam << std::endl;
+//                                std::cout  << "\t\tExam name:" << examMap[exam].toStdString() << "\t|\tdb key: "<< exam << std::endl;
+                                out << YAML::Key << examMap[exam].toStdString();
                                 QMap<int, QString> datasetMap;
                                 for(QString datasetFilter : datasetFilterList)
                                 {
@@ -127,73 +132,39 @@ void shanoirqr::start()
                                 if(freeLabelList.size()!=0)
                                 {
                                     auto keys=findDatasetListFilterFromField(study,patient,exam,freeLabelList,matchingTypeVector);
+                                    out << YAML::Value << YAML::BeginMap;
                                     for(int dataset : keys)
                                     {
                                         QtShanoirDataset dataSetForData=getShanoirDataSet(study,patient,exam,dataset);
-                                        std::cout << "\t\t Data set: key: "<<dataset<<" matching: "<<std::endl;
+//                                        std::cout << "\t\t Data set: key: "<<dataset<<" matching: "<<std::endl;
 
                                         for(unsigned int index=0;index<freeLabelList.size();++index)
                                         {
                                             // display all values of the matching field (only once)
                                             if(std::find_if(freeLabelList.begin(),freeLabelList.begin()+index,[&](std::pair<QString,QString> a){return(a.first==freeLabelList[index].first);})==(freeLabelList.begin()+index))
-                                                std::cout<<"\t\t\t "<<freeLabelList[index].first.toStdString()<<":"<<dataSetForData.getField(freeLabelList[index].first).toStdString()<<std::endl;
+                                            {
+//                                                std::cout<<"\t\t\t "<<freeLabelList[index].first.toStdString()<<":"<<dataSetForData.getField(freeLabelList[index].first).toStdString()<<std::endl;
+                                                out << YAML::Key << freeLabelList[index].first.toStdString();
+                                                out << YAML::Value << dataSetForData.getField(freeLabelList[index].first).toStdString();
+                                            }
                                         }
                                         if(!m_args.download.isEmpty())
                                         {
                                             downloadFile(QString::number(dataset), m_args.download);
                                         }
                                     }
-
+                                    out << YAML::EndMap;
                                 }
                             }
+                            out << YAML::EndMap;
                         }
+                        out << YAML::EndMap;
                     }
+                    out << YAML::EndMap;
                 }
             }
         }
-
-        /*
-        for(QString studyfilter : studyFilterList)
-        {
-            QMap<int, QString> studiesMap;
-            studiesMap.unite(findStudyList(studyfilter));
-            for(int study : studiesMap.keys())
-            {
-                std::cout  << "Study name:" << studiesMap[study].toStdString() << "\t|\tdb key: "<< study << std::endl;
-                QMap<int, QString> patientsMap;
-                for(QString patientFilter : patientFilterList)
-                {
-                    patientsMap.unite(findSubjectList(studiesMap[study], patientFilter));
-                    for(int patient : patientsMap.keys())
-                    {
-                        std::cout  << "\tPatient name:" << patientsMap[patient].toStdString() << "\t|\tdb key: "<< patient << std::endl;
-                        QMap<int, QString> examMap;
-                        for(QString examFilter : examFilterList)
-                        {
-                            examMap.unite(findExamListf(study, patient, examFilter));
-                            for(int exam : examMap.keys())
-                            {
-                                std::cout  << "\t\tExam name:" << examMap[exam].toStdString() << "\t|\tdb key: "<< exam << std::endl;
-                                QMap<int, QString> datasetMap;
-                                for(QString datasetFilter : datasetFilterList)
-                                {
-                                    datasetMap.unite(findDatasetListf(study, patient, exam, datasetFilter));
-                                    for(int dataset : datasetMap.keys())
-                                    {
-                                           //findProcessedDatasetList(study, patient, exam,dataset)
-                                        std::cout  << "\t\tDataset name:" << datasetMap[dataset].toStdString() << "\t|\tdb key: "<< dataset << std::endl;
-                                        if(!m_args.download.isEmpty())
-                                        {
-                                            downloadFile(QString::number(dataset), m_args.download);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
+        std::cout << out.c_str()  << std::endl;
     }
 
     emit finished();

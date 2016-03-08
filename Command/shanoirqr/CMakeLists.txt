@@ -6,12 +6,9 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     )
 find_package(docopt REQUIRED)
-
 find_package(yaml-cpp REQUIRED)
-link_directories(${yaml-cpp_LIBRARY_DIRS})
+find_package(QuaZip REQUIRED)
 
-link_directories(${docopt_LIBRARY_DIRS})
-message("docopt include dirs: ${docopt_INCLUDE_DIRS}")
 
 ## #############################################################################
 ## List Sources.
@@ -29,12 +26,6 @@ list_header_directories_to_include(${PROJECT_NAME}
     ${${PROJECT_NAME}_HEADERS}
     )
 
-include_directories(${${PROJECT_NAME}_INCLUDE_DIRS}
-    ${docopt_INCLUDE_DIRS}
-    ${yaml-cpp_INCLUDE_DIRS}
-    ${DAO_INCLUDE_DIRS}
-    ${QuaZip_INCLUDE_DIRS}
-    )
 
 ## #############################################################################
 ## exe definition.
@@ -44,11 +35,31 @@ add_executable(${PROJECT_NAME}
     ${${PROJECT_NAME}_CFILES}
     )
 
+## #############################################################################
+## include directorie.
+## #############################################################################
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${${PROJECT_NAME}_INCLUDE_DIRS}
+    ${docopt_INCLUDE_DIRS}
+    ${yaml-cpp_INCLUDE_DIRS}
+    )
+
+## #############################################################################
+## Link
+## #############################################################################
+
 target_link_libraries(${PROJECT_NAME}
-    ${QT_LIBRARIES}
+    Qt5::Core
+    Qt5::Network
+    Qt5::Xml
     DAO
     docopt
     yaml-cpp
     )
+
+## #############################################################################
+## install
+## #############################################################################
 
 set_lib_install_rules(${PROJECT_NAME})

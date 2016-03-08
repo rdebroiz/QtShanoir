@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QLibrary>
 #include <QMessageBox>
+#include <QCheckBox>
 
 QtShanoirUploadWidgetDatasettypeDetailsSpectDataset::QtShanoirUploadWidgetDatasettypeDetailsSpectDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files, QWidget *parent) : QWidget(parent), ui(new Ui::QtShanoirUploadWidgetDatasettypeDetailsSpectDataset)
 {

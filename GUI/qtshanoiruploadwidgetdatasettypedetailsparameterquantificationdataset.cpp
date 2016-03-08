@@ -1,6 +1,10 @@
 #include "qtshanoiruploadwidgetdatasettypedetailsparameterquantificationdataset.h"
 #include "ui_qtshanoiruploadwidgetdatasettypedetailsparameterquantificationdataset.h"
 
+#include <QCheckBox>
+#include <QMessageBox>
+
+
 QtShanoirUploadWidgetDatasetTypeDetailsParameterQuantificationDataset::QtShanoirUploadWidgetDatasetTypeDetailsParameterQuantificationDataset(QList<QtShanoirUploadProcessedDatasetAttributesTemp> files, QWidget *parent) : QWidget(parent), ui(new Ui::QtShanoirUploadWidgetDatasetTypeDetailsParameterQuantificationDataset)
 {
     ui->setupUi(this);
